@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/surahFragment">
+
+    <fragment
+        android:id="@+id/surahFragment"
+        android:name="com.dzulfaqar.quranku.features.main.surah.SurahFragment"
+        android:label="fragment_surah"
+        tools:layout="@layout/fragment_surah">
+        <action
+            android:id="@+id/action_surahFragment_to_quranActivity"
+            app:destination="@id/quranActivity" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/juzFragment"
+        android:name="com.dzulfaqar.quranku.features.main.juz.JuzFragment"
+        android:label="fragment_juz"
+        tools:layout="@layout/fragment_juz">
+        <action
+            android:id="@+id/action_juzFragment_to_quranActivity"
+            app:destination="@id/quranActivity" />
+    </fragment>
+
+    <activity
+        android:id="@+id/quranActivity"
+        android:name="com.dzulfaqar.quranku.features.quran.QuranActivity"
+        android:label="activity_quran"
+        tools:layout="@layout/activity_quran">
+        <argument
+            android:name="surah"
+            android:defaultValue="@null"
+            app:argType="com.dzulfaqar.quranku.model.SurahModel"
+            app:nullable="true" />
+        <argument
+            android:name="juz"
+            android:defaultValue="@null"
+            app:argType="com.dzulfaqar.quranku.model.JuzModel"
+            app:nullable="true" />
+    </activity>
+
+    <activity
+        android:id="@+id/settingActivity"
+        android:name="com.dzulfaqar.quranku.setting.SettingActivity"
+        app:moduleName="setting"
+        tools:layout="@layout/activity_setting" />
+
+    <activity
+        android:id="@+id/bookmarkActivity"
+        android:name="com.dzulfaqar.quranku.bookmark.BookmarkActivity"
+        app:moduleName="bookmark"
+        tools:layout="@layout/activity_bookmark" />
+</navigation>

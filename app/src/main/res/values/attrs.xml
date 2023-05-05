@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <attr name="accent" format="color" />
+    <attr name="surahName" format="color" />
+    <attr name="arabicText" format="color" />
+    <attr name="buttonRecitation" format="color" />
+    <attr name="reciterName" format="color" />
+</resources>

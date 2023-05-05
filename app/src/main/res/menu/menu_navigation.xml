@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/surahFragment"
+        android:icon="@drawable/ic_surah"
+        android:title="@string/surah" />
+
+    <item
+        android:id="@+id/juzFragment"
+        android:icon="@drawable/ic_juz"
+        android:title="@string/juz" />
+
+</menu>

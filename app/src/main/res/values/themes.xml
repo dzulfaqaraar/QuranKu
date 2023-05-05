@@ -1,0 +1,44 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Theme.QuranKu" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <!-- Primary brand color. -->
+        <item name="colorPrimary">@color/primaryColor</item>
+        <item name="colorPrimaryVariant">@color/primaryDarkColor</item>
+        <item name="colorOnPrimary">@color/primaryTextColor</item>
+        <!-- Secondary brand color. -->
+        <item name="colorSecondary">@color/secondaryColor</item>
+        <item name="colorSecondaryVariant">@color/secondaryDarkColor</item>
+        <item name="colorOnSecondary">@color/secondaryTextColor</item>
+        <!-- Status bar color. -->
+        <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
+        <!-- Customize your theme here. -->
+
+        <item name="accent">@color/primaryColor</item>
+        <item name="surahName">@color/veryDarkRedMostlyBlack</item>
+        <item name="arabicText">@color/textLight</item>
+        <item name="buttonRecitation">@color/primaryTextColor</item>
+        <item name="reciterName">@color/veryDarkRedMostlyBlack</item>
+    </style>
+
+    <style name="TextCustom">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textAlignment">center</item>
+        <item name="android:textSize">12sp</item>
+    </style>
+
+    <style name="TextCustom.Content">
+        <item name="android:textColor">?colorOnSecondary</item>
+    </style>
+
+    <style name="CustomTab">
+        <item name="android:background">?colorPrimary</item>
+        <item name="tabIndicatorColor">?colorOnPrimary</item>
+        <item name="tabIndicatorHeight">2dp</item>
+        <item name="tabTextColor">?colorOnPrimary</item>
+    </style>
+
+    <style name="Theme.QuranKu.Dialog" parent="Theme.MaterialComponents.DayNight.Dialog.FixedSize">
+        <item name="reciterName">@color/veryDarkRedMostlyBlack</item>
+    </style>
+</resources>

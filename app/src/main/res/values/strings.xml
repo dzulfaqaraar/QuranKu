@@ -1,0 +1,24 @@
+<resources>
+    <string name="app_name">Quran Ku</string>
+    <string name="title_bookmark">Bookmark</string>
+    <string name="title_setting">Setting</string>
+    <string name="title_murattal">Murattal</string>
+    <string name="more">More</string>
+    <string name="setting">Setting</string>
+    <string name="bookmark">Bookmark</string>
+    <string name="is_dark_theme">Dark theme</string>
+    <string name="button_recitation">Recitation Button</string>
+    <string name="list_recitations">List of Recitations</string>
+    <string name="no_recitation">No recitation selected</string>
+    <string name="select_recitation">Select recitation please</string>
+
+    <string name="something_wrong">Something went wrong</string>
+    <string name="data_not_found">Data not found</string>
+    <string name="juz">Juz</string>
+    <string name="surah">Surah</string>
+    <string name="sample_number">1</string>
+    <string name="sample_text">Sample</string>
+    <string name="no_data">No data found</string>
+    <string name="sync_failed">Sync failed. Please try again.</string>
+    <string name="title_library">Library</string>
+</resources>

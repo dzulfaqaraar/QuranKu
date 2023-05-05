@@ -1,0 +1,37 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Theme.QuranKu" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <!-- Primary brand color. -->
+        <item name="colorPrimary">@color/primaryLightColor</item>
+        <item name="colorPrimaryVariant">@color/primaryColor</item>
+        <item name="colorOnPrimary">@color/secondaryTextColor</item>
+        <!-- Secondary brand color. -->
+        <item name="colorSecondary">@color/secondaryLightColor</item>
+        <item name="colorSecondaryVariant">@color/secondaryColor</item>
+        <item name="colorOnSecondary">@color/primaryTextColor</item>
+        <!-- Status bar color. -->
+        <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
+        <!-- Customize your theme here. -->
+
+        <item name="accent">@color/primaryLightColor</item>
+        <item name="surahName">#FFEFEF</item>
+        <item name="arabicText">@color/textDark</item>
+        <item name="buttonRecitation">?colorOnPrimary</item>
+        <item name="reciterName">@android:color/black</item>
+    </style>
+
+    <style name="TextCustom.Content">
+        <item name="android:textColor">?colorOnSecondary</item>
+    </style>
+
+    <style name="CustomTab">
+        <item name="android:background">@android:color/transparent</item>
+        <item name="tabIndicatorColor">?colorOnPrimary</item>
+        <item name="tabIndicatorHeight">2dp</item>
+        <item name="tabTextColor">?colorOnSecondary</item>
+    </style>
+
+    <style name="Theme.QuranKu.Dialog" parent="Theme.MaterialComponents.DayNight.Dialog.FixedSize">
+        <item name="reciterName">@android:color/black</item>
+    </style>
+</resources>
