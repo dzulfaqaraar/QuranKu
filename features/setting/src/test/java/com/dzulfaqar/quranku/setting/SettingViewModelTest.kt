@@ -4,10 +4,10 @@ import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.dzulfaqar.quranku.core.coroutine.TestCoroutineContextProvider
 import com.dzulfaqar.quranku.core.domain.usecase.SettingUseCase
 import com.dzulfaqar.quranku.setting.util.MainCoroutineScopeRule
-import com.dzulfaqar.quranku.setting.util.getValueForTest
-import com.nhaarman.mockitokotlin2.whenever
+import com.dzulfaqar.quranku.core.utils.getValueForTest
+import org.mockito.kotlin.whenever
 import kotlinx.coroutines.flow.flow
-import kotlinx.coroutines.test.runBlockingTest
+import kotlinx.coroutines.test.runTest
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertNotNull
 import org.junit.Rule
@@ -35,7 +35,7 @@ class SettingViewModelTest {
     private lateinit var viewModel: SettingViewModel
 
     @Test
-    fun saveThemeSetting() = runBlockingTest {
+    fun saveThemeSetting() = runTest {
         whenever(useCase.getThemeSetting()).thenReturn(flow { emit(true) })
 
         viewModel = SettingViewModel(coroutineContextProvider, useCase)

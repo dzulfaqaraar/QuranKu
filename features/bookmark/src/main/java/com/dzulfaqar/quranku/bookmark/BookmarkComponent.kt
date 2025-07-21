@@ -13,7 +13,7 @@ interface BookmarkComponent {
     @Component.Builder
     interface Builder {
         fun context(@BindsInstance context: Context): Builder
-        fun appDependencies(moduleDependencies: BookmarkModuleDependencies): Builder
+        fun appDependencies(bookmarkModuleDependencies: BookmarkModuleDependencies): Builder
         fun build(): BookmarkComponent
     }
 }

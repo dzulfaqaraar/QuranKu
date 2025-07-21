@@ -24,13 +24,13 @@ class NetworkModule {
 
     @Provides
     fun provideOkHttpClient(@ApplicationContext context: Context): OkHttpClient {
-        val certificatePinner = CertificatePinner.Builder()
-            .add(Constant.HOSTNAME, "sha256/ewoEb29dLdjf1Kjh5EhOWD2qt+ZhcL3IDICVJPM4l+0=")
-            .add(Constant.HOSTNAME, "sha256/hS5jJ4P+iQUErBkvoWBQOd1T7VOAYlOVegvv1iMzpxA=")
-            .add(Constant.HOSTNAME, "sha256/Nk7bxQhoCu9z2V4n2MZ6A4uaaThDDqeumh5jvS0mPJk=")
-            .add(Constant.HOSTNAME, "sha256/FEzVOUp4dF3gI0ZVPRJhFbSJVXR+uQmMH65xhs1glH4=")
-            .add(Constant.HOSTNAME, "sha256/Y9mvm0exBk1JoQ57f9Vm28jKo5lFm/woKcVxrYxu80o=")
-            .build()
+//        val certificatePinner = CertificatePinner.Builder()
+//            .add(Constant.HOSTNAME, "sha256/ewoEb29dLdjf1Kjh5EhOWD2qt+ZhcL3IDICVJPM4l+0=")
+//            .add(Constant.HOSTNAME, "sha256/hS5jJ4P+iQUErBkvoWBQOd1T7VOAYlOVegvv1iMzpxA=")
+//            .add(Constant.HOSTNAME, "sha256/Nk7bxQhoCu9z2V4n2MZ6A4uaaThDDqeumh5jvS0mPJk=")
+//            .add(Constant.HOSTNAME, "sha256/FEzVOUp4dF3gI0ZVPRJhFbSJVXR+uQmMH65xhs1glH4=")
+//            .add(Constant.HOSTNAME, "sha256/Y9mvm0exBk1JoQ57f9Vm28jKo5lFm/woKcVxrYxu80o=")
+//            .build()
         return OkHttpClient.Builder()
             .apply {
                 if (BuildConfig.DEBUG) {
@@ -47,7 +47,7 @@ class NetworkModule {
             }
             .connectTimeout(120, TimeUnit.SECONDS)
             .readTimeout(120, TimeUnit.SECONDS)
-            .certificatePinner(certificatePinner)
+//            .certificatePinner(certificatePinner)
             .build()
     }
 

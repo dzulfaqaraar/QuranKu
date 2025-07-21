@@ -2,7 +2,6 @@ package com.dzulfaqar.quranku.ui
 
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
-import by.kirich1409.viewbindingdelegate.viewBinding
 import com.dzulfaqar.quranku.R
 import com.dzulfaqar.quranku.databinding.ItemJuzBinding
 import com.dzulfaqar.quranku.core.utils.BaseAdapter
@@ -19,7 +18,7 @@ class JuzAdapter : BaseAdapter<JuzModel, JuzAdapter.ListViewHolder>(
         holder.bind(item)
 
     inner class ListViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        private val binding: ItemJuzBinding by viewBinding()
+        private val binding: ItemJuzBinding = ItemJuzBinding.bind(view)
 
         fun bind(data: JuzModel) {
             with(binding) {
@@ -32,7 +31,7 @@ class JuzAdapter : BaseAdapter<JuzModel, JuzAdapter.ListViewHolder>(
 
         init {
             binding.root.setOnClickListener {
-                onItemClick?.invoke(getItem(bindingAdapterPosition))
+                onItemClick?.invoke(getItem(adapterPosition))
             }
         }
     }

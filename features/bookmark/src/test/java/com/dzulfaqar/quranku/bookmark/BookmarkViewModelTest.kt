@@ -3,14 +3,14 @@ package com.dzulfaqar.quranku.bookmark
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.dzulfaqar.quranku.bookmark.util.DataDummy
 import com.dzulfaqar.quranku.bookmark.util.MainCoroutineScopeRule
-import com.dzulfaqar.quranku.bookmark.util.getValueForTest
+import com.dzulfaqar.quranku.core.utils.getValueForTest
 import com.dzulfaqar.quranku.core.coroutine.TestCoroutineContextProvider
 import com.dzulfaqar.quranku.core.domain.usecase.QuranUseCase
 import com.dzulfaqar.quranku.model.AyatModel
 import com.dzulfaqar.quranku.utils.mapToDomain
-import com.nhaarman.mockitokotlin2.whenever
+import org.mockito.kotlin.whenever
 import kotlinx.coroutines.flow.flow
-import kotlinx.coroutines.test.runBlockingTest
+import kotlinx.coroutines.test.runTest
 import org.junit.Assert.*
 import org.junit.Rule
 import org.junit.Test
@@ -41,7 +41,7 @@ class BookmarkViewModelTest {
     private val ayatDomain = ayatModel.mapToDomain()
 
     @Test
-    fun getListBookmarkEmpty() = runBlockingTest {
+    fun getListBookmarkEmpty() = runTest {
         whenever(useCase.getAllBookmark()).thenReturn(flow { emit(arrayListOf()) })
 
         viewModel = BookmarkViewModel(coroutineContextProvider, useCase)
@@ -55,7 +55,7 @@ class BookmarkViewModelTest {
     }
 
     @Test
-    fun getListBookmarkSuccess() = runBlockingTest {
+    fun getListBookmarkSuccess() = runTest {
         whenever(useCase.getAllBookmark()).thenReturn(flow { emit(listAyatDomain) })
 
         viewModel = BookmarkViewModel(coroutineContextProvider, useCase)
@@ -69,7 +69,7 @@ class BookmarkViewModelTest {
     }
 
     @Test
-    fun bookmarkAyat() = runBlockingTest {
+    fun bookmarkAyat() = runTest {
         whenever(useCase.getAllBookmark()).thenReturn(flow { emit(listAyatDomain) })
 
         viewModel = BookmarkViewModel(coroutineContextProvider, useCase)
@@ -83,7 +83,7 @@ class BookmarkViewModelTest {
     }
 
     @Test
-    fun bookmarkAyatWithCancel() = runBlockingTest {
+    fun bookmarkAyatWithCancel() = runTest {
         whenever(useCase.getAllBookmark()).thenReturn(flow { emit(listAyatDomain) })
 
         viewModel = BookmarkViewModel(coroutineContextProvider, useCase)

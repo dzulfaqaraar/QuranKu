@@ -25,7 +25,7 @@ class DatabaseModule {
         return Room.databaseBuilder(
             context,
             QuranDatabase::class.java, "Quran.db"
-        ).fallbackToDestructiveMigration()
+        ).fallbackToDestructiveMigration(true)
             .openHelperFactory(factory)
             .build()
     }

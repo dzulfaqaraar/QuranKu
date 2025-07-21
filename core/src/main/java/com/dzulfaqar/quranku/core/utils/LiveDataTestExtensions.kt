@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.dzulfaqar.quranku.setting.util
+package com.dzulfaqar.quranku.core.utils
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer

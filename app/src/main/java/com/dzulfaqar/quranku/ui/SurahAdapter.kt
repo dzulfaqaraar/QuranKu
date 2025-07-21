@@ -2,7 +2,6 @@ package com.dzulfaqar.quranku.ui
 
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
-import by.kirich1409.viewbindingdelegate.viewBinding
 import com.dzulfaqar.quranku.R
 import com.dzulfaqar.quranku.databinding.ItemSurahBinding
 import com.dzulfaqar.quranku.core.utils.BaseAdapter
@@ -19,7 +18,7 @@ class SurahAdapter : BaseAdapter<SurahModel, SurahAdapter.ListViewHolder>(
         holder.bind(item)
 
     inner class ListViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        private val binding: ItemSurahBinding by viewBinding()
+        private val binding: ItemSurahBinding = ItemSurahBinding.bind(view)
 
         fun bind(data: SurahModel) {
             with(binding) {
@@ -31,7 +30,7 @@ class SurahAdapter : BaseAdapter<SurahModel, SurahAdapter.ListViewHolder>(
 
         init {
             binding.root.setOnClickListener {
-                onItemClick?.invoke(getItem(bindingAdapterPosition))
+                onItemClick?.invoke(getItem(adapterPosition))
             }
         }
     }

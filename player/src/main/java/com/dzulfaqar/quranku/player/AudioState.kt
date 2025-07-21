@@ -1,9 +1,9 @@
 package com.dzulfaqar.quranku.player
 
 sealed class AudioState {
-    object PREPARING: AudioState()
-    object PAUSE: AudioState()
-    object PLAYING: AudioState()
-    object NORMAL: AudioState()
-    object ERROR: AudioState()
+    data object Preparing : AudioState()
+    data object Paused : AudioState()
+    data object Playing : AudioState()
+    data object Idle : AudioState()
+    data object Error : AudioState()
 }

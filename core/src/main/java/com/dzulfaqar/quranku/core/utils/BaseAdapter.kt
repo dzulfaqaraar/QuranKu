@@ -19,7 +19,7 @@ abstract class BaseAdapter<T : Any, VH : RecyclerView.ViewHolder>(
     protected abstract fun bindItems(holder: VH, item: T, position: Int)
 
     override fun onBindViewHolder(holder: VH, position: Int) {
-        val item: T = getItem(holder.bindingAdapterPosition)
+        val item: T = getItem(position)
         bindItems(holder, item, position)
     }
 

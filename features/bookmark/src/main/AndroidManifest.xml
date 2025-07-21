@@ -15,6 +15,6 @@
         <activity
             android:name=".BookmarkActivity"
             android:exported="false"
-            android:label="@string/bookmark" />
+            android:label="@string/bookmark_title" />
     </application>
 </manifest>

@@ -5,12 +5,10 @@ import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
 import com.dzulfaqar.quranku.core.coroutine.CoroutineContextProvider
 import com.dzulfaqar.quranku.core.domain.usecase.SettingUseCase
-import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
-@HiltViewModel
 class SettingViewModel @Inject constructor(
     private val coroutineContextProvider: CoroutineContextProvider,
     private val settingUseCase: SettingUseCase

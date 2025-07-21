@@ -8,12 +8,12 @@ import com.dzulfaqar.quranku.core.domain.model.JuzDomain
 import com.dzulfaqar.quranku.core.domain.model.SurahDomain
 import com.dzulfaqar.quranku.core.util.DataDummy
 import com.dzulfaqar.quranku.core.utils.DomainMapper
-import com.nhaarman.mockitokotlin2.times
-import com.nhaarman.mockitokotlin2.whenever
+import org.mockito.kotlin.times
+import org.mockito.kotlin.whenever
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.last
-import kotlinx.coroutines.test.runBlockingTest
+import kotlinx.coroutines.test.runTest
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertTrue
 import org.junit.Test
@@ -67,7 +67,7 @@ class CoreRepositoryTest {
         DomainMapper.mapAyatEntitiesToDomainWithListSurah(surahNames, bookmarkedAyatEntity)
 
     @Test
-    fun getThemeSetting() = runBlockingTest {
+    fun getThemeSetting() = runTest {
         whenever(local.getThemeSetting()).thenReturn(flow {
             emit(true)
         })
@@ -82,7 +82,7 @@ class CoreRepositoryTest {
     }
 
     @Test
-    fun saveThemeSetting() = runBlockingTest {
+    fun saveThemeSetting() = runTest {
         coreRepository = FakeCoreRepository(local, remote)
         coreRepository.saveThemeSetting(true)
 
@@ -90,7 +90,7 @@ class CoreRepositoryTest {
     }
 
     @Test
-    fun getAllSurahLoading() = runBlockingTest {
+    fun getAllSurahLoading() = runTest {
         coreRepository = FakeCoreRepository(local, remote)
 
         val responseFlow = coreRepository.getAllSurah()
@@ -99,7 +99,7 @@ class CoreRepositoryTest {
     }
 
     @Test
-    fun getAllSurahEmpty() = runBlockingTest {
+    fun getAllSurahEmpty() = runTest {
         whenever(local.getAllSurah()).thenReturn(flow {
             emit(arrayListOf())
         })
@@ -121,7 +121,7 @@ class CoreRepositoryTest {
     }
 
     @Test
-    fun getAllSurahSuccess() = runBlockingTest {
+    fun getAllSurahSuccess() = runTest {
         whenever(local.getAllSurah()).thenReturn(flow {
             emit(listSurahEntity)
         })
@@ -144,7 +144,7 @@ class CoreRepositoryTest {
     }
 
     @Test
-    fun getAllSurahFailed() = runBlockingTest {
+    fun getAllSurahFailed() = runTest {
         whenever(local.getAllSurah()).thenReturn(flow {
             emit(listSurahEntity)
         })
@@ -166,7 +166,7 @@ class CoreRepositoryTest {
     }
 
     @Test
-    fun getAllJuzLoading() = runBlockingTest {
+    fun getAllJuzLoading() = runTest {
         coreRepository = FakeCoreRepository(local, remote)
 
         val responseFlow = coreRepository.getAllJuz()
@@ -175,7 +175,7 @@ class CoreRepositoryTest {
     }
 
     @Test
-    fun getAllJuzEmpty() = runBlockingTest {
+    fun getAllJuzEmpty() = runTest {
         whenever(local.getAllJuz()).thenReturn(flow {
             emit(arrayListOf())
         })
@@ -197,7 +197,7 @@ class CoreRepositoryTest {
     }
 
     @Test
-    fun getAllJuzSuccess() = runBlockingTest {
+    fun getAllJuzSuccess() = runTest {
         whenever(local.getAllJuz()).thenReturn(flow {
             emit(listJuzEntity)
         })
@@ -220,7 +220,7 @@ class CoreRepositoryTest {
     }
 
     @Test
-    fun getAllJuzFailed() = runBlockingTest {
+    fun getAllJuzFailed() = runTest {
         whenever(local.getAllJuz()).thenReturn(flow {
             emit(listJuzEntity)
         })
@@ -242,7 +242,7 @@ class CoreRepositoryTest {
     }
 
     @Test
-    fun getAllAyatLoading() = runBlockingTest {
+    fun getAllAyatLoading() = runTest {
         coreRepository = FakeCoreRepository(local, remote)
 
         val responseFlow = coreRepository.getAllAyat()
@@ -251,7 +251,7 @@ class CoreRepositoryTest {
     }
 
     @Test
-    fun getAllAyatEmpty() = runBlockingTest {
+    fun getAllAyatEmpty() = runTest {
         whenever(local.getAllAyat()).thenReturn(flow {
             emit(arrayListOf())
         })
@@ -273,7 +273,7 @@ class CoreRepositoryTest {
     }
 
     @Test
-    fun getAllAyatSuccess() = runBlockingTest {
+    fun getAllAyatSuccess() = runTest {
         whenever(local.getAllAyat()).thenReturn(flow {
             emit(listAyatEntity)
         })
@@ -296,7 +296,7 @@ class CoreRepositoryTest {
     }
 
     @Test
-    fun getAllAyatFailed() = runBlockingTest {
+    fun getAllAyatFailed() = runTest {
         whenever(local.getAllAyat()).thenReturn(flow {
             emit(listAyatEntity)
         })
@@ -318,7 +318,7 @@ class CoreRepositoryTest {
     }
 
     @Test
-    fun getAllAyatBySurahEmpty() = runBlockingTest {
+    fun getAllAyatBySurahEmpty() = runTest {
         whenever(local.getAllAyatBySurah(surahDomain.id)).thenReturn(flow {
             emit(arrayListOf())
         })
@@ -334,7 +334,7 @@ class CoreRepositoryTest {
     }
 
     @Test
-    fun getAllAyatBySurahSuccess() = runBlockingTest {
+    fun getAllAyatBySurahSuccess() = runTest {
         whenever(local.getAllAyatBySurah(surahDomain.id)).thenReturn(flow {
             emit(listAyatEntity)
         })
@@ -350,7 +350,7 @@ class CoreRepositoryTest {
     }
 
     @Test
-    fun getAllAyatByJuzEmpty() = runBlockingTest {
+    fun getAllAyatByJuzEmpty() = runTest {
         whenever(local.getJuzSurah(juzDomain.number)).thenReturn(arrayListOf())
         whenever(local.getSurahByIds(arrayListOf())).thenReturn(arrayListOf())
         whenever(local.getAllAyatByJuz(juzDomain.firstAyat, juzDomain.lastAyat))
@@ -369,7 +369,7 @@ class CoreRepositoryTest {
     }
 
     @Test
-    fun getAllAyatByJuzSuccess() = runBlockingTest {
+    fun getAllAyatByJuzSuccess() = runTest {
         whenever(local.getJuzSurah(juzDomain.number)).thenReturn(listJuzSurahEntity)
         whenever(local.getSurahByIds(surahIds)).thenReturn(listSurahEntity)
         whenever(local.getAllAyatByJuz(juzDomain.firstAyat, juzDomain.lastAyat))
@@ -388,7 +388,7 @@ class CoreRepositoryTest {
     }
 
     @Test
-    fun updateBookmark() = runBlockingTest {
+    fun updateBookmark() = runTest {
         coreRepository = FakeCoreRepository(local, remote)
         coreRepository.updateBookmark(ayatDomain, true)
 
@@ -396,7 +396,7 @@ class CoreRepositoryTest {
     }
 
     @Test
-    fun getAllBookmarkEmpty() = runBlockingTest {
+    fun getAllBookmarkEmpty() = runTest {
         whenever(local.getAllBookmark()).thenReturn(arrayListOf())
         whenever(local.getSurahByIds(arrayListOf())).thenReturn(arrayListOf())
 
@@ -411,7 +411,7 @@ class CoreRepositoryTest {
     }
 
     @Test
-    fun getAllBookmarkSuccess() = runBlockingTest {
+    fun getAllBookmarkSuccess() = runTest {
         whenever(local.getAllBookmark()).thenReturn(bookmarkedAyatEntity)
         whenever(local.getSurahByIds(bookmarkedIds)).thenReturn(listSurahEntity)
 

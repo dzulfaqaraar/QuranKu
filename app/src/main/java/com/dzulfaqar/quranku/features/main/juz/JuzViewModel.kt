@@ -10,7 +10,6 @@ import com.dzulfaqar.quranku.core.domain.usecase.QuranUseCase
 import com.dzulfaqar.quranku.model.JuzModel
 import com.dzulfaqar.quranku.utils.AppMapper
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
@@ -31,8 +30,8 @@ class JuzViewModel @Inject constructor(
     private fun getListJuz() {
         viewModelScope.launch {
             withContext(coroutineContextProvider.io) {
-                quranUseCase.getAllJuz().collect {
-                    _listJuz.postValue(AppMapper.mapJuzDomainToPresentation(it))
+                quranUseCase.getAllJuz().collect { data ->
+                    _listJuz.postValue(AppMapper.mapJuzDomainToPresentation(data))
                 }
             }
         }

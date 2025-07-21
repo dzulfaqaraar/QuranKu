@@ -1,6 +1,7 @@
 package com.dzulfaqar.quranku.features.quran
 
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
@@ -8,9 +9,10 @@ import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.WindowCompat
+import androidx.core.view.WindowInsetsCompat
 import androidx.navigation.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
-import by.kirich1409.viewbindingdelegate.viewBinding
 import com.dzulfaqar.quranku.R
 import com.dzulfaqar.quranku.core.data.Resource
 import com.dzulfaqar.quranku.ui.AyatAdapter
@@ -21,14 +23,14 @@ import com.google.android.play.core.splitinstall.SplitInstallRequest
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class QuranActivity : AppCompatActivity(R.layout.activity_quran), AudioPlayer.AudioPlayerListener {
+class QuranActivity : AppCompatActivity(), AudioPlayer.AudioPlayerListener {
 
-    private val binding: ActivityQuranBinding by viewBinding(R.id.container)
+    private lateinit var binding: ActivityQuranBinding
     private val viewModel: QuranViewModel by viewModels()
     private val args: QuranActivityArgs by navArgs()
 
-    private var ayatAdapter: AyatAdapter? = null
     private var audioPlayer: AudioPlayer? = null
+    private var ayatAdapter: AyatAdapter? = null
 
     private val resultLauncher = registerForActivityResult(
         ActivityResultContracts.StartActivityForResult()
@@ -40,6 +42,10 @@ class QuranActivity : AppCompatActivity(R.layout.activity_quran), AudioPlayer.Au
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        binding = ActivityQuranBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+        setupStatusBar()
+        setupWindowInsets()
         setupToolbar()
 
         if (args.surah != null) {
@@ -49,6 +55,7 @@ class QuranActivity : AppCompatActivity(R.layout.activity_quran), AudioPlayer.Au
         }
 
         audioPlayer = AudioPlayer.getInstance(this)
+        audioPlayer?.setAudioPlayerListener(this)
 
         ayatAdapter = AyatAdapter { ayat, isBookmark ->
             viewModel.bookmarkAyat(ayat, isBookmark)
@@ -57,6 +64,56 @@ class QuranActivity : AppCompatActivity(R.layout.activity_quran), AudioPlayer.Au
         getExtras()
         setupView()
         setupObserver()
+    }
+
+    private fun setupStatusBar() {
+        // Enable edge-to-edge display while keeping system bars visible
+        WindowCompat.setDecorFitsSystemWindows(window, false)
+        
+        val windowInsetsController = WindowCompat.getInsetsController(window, window.decorView)
+        
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+            // API 30+ - Configure status bar appearance
+            windowInsetsController.apply {
+                // Keep system bars visible but configure appearance
+                isAppearanceLightStatusBars = false // Dark content on light background
+                isAppearanceLightNavigationBars = false
+            }
+        } else {
+            // API 23+ - Use legacy system UI visibility flags for layout only
+            @Suppress("DEPRECATION")
+            window.decorView.systemUiVisibility = (
+                View.SYSTEM_UI_FLAG_LAYOUT_STABLE or
+                View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+            )
+        }
+        
+        // Set status bar color programmatically (deprecated but still functional)
+        @Suppress("DEPRECATION")
+        window.statusBarColor = getColor(R.color.primaryDarkColor)
+        @Suppress("DEPRECATION")
+        window.navigationBarColor = getColor(R.color.primaryDarkColor)
+    }
+
+    private fun setupWindowInsets() {
+        // Handle window insets for edge-to-edge display
+        binding.root.setOnApplyWindowInsetsListener { _, windowInsets ->
+            val windowInsetsCompat = WindowInsetsCompat.toWindowInsetsCompat(windowInsets)
+            val systemBarsInsets = windowInsetsCompat.getInsets(WindowInsetsCompat.Type.systemBars())
+            
+            // Apply minimal top padding to toolbar to account for status bar if needed
+            val currentTopPadding = binding.layoutToolbar.root.paddingTop
+            if (currentTopPadding < systemBarsInsets.top) {
+                binding.layoutToolbar.root.setPadding(
+                    binding.layoutToolbar.root.paddingLeft,
+                    systemBarsInsets.top,
+                    binding.layoutToolbar.root.paddingRight,
+                    binding.layoutToolbar.root.paddingBottom
+                )
+            }
+            
+            windowInsets
+        }
     }
 
     private fun setupToolbar() {
@@ -244,7 +301,12 @@ class QuranActivity : AppCompatActivity(R.layout.activity_quran), AudioPlayer.Au
     }
 
     private fun recitationSelected(data: Intent?) {
-        viewModel.selectedReciter = data?.getParcelableExtra(EXTRA_SELECTED_DATA)
+        viewModel.selectedReciter = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            data?.getParcelableExtra(EXTRA_SELECTED_DATA, com.dzulfaqar.quranku.model.ReciterModel::class.java)
+        } else {
+            @Suppress("DEPRECATION")
+            data?.getParcelableExtra(EXTRA_SELECTED_DATA)
+        }
         with(binding) {
             if (viewModel.selectedReciter?.style != null) {
                 recitationName.text =
@@ -285,7 +347,6 @@ class QuranActivity : AppCompatActivity(R.layout.activity_quran), AudioPlayer.Au
         super.onDestroy()
         binding.recyclerView.adapter = null
         audioPlayer?.release()
-        audioPlayer = null
     }
 
     companion object {

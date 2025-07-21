@@ -13,7 +13,7 @@ interface RecitationComponent {
     @Component.Builder
     interface Builder {
         fun context(@BindsInstance context: Context): Builder
-        fun appDependencies(moduleDependencies: RecitationModuleDependencies): Builder
+        fun appDependencies(recitationModuleDependencies: RecitationModuleDependencies): Builder
         fun build(): RecitationComponent
     }
 }

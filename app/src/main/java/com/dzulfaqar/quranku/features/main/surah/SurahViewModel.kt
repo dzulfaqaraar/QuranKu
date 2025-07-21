@@ -10,7 +10,6 @@ import com.dzulfaqar.quranku.core.domain.usecase.QuranUseCase
 import com.dzulfaqar.quranku.model.SurahModel
 import com.dzulfaqar.quranku.utils.AppMapper
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
@@ -30,8 +29,8 @@ class SurahViewModel @Inject constructor(
     private fun getListSurah() {
         viewModelScope.launch {
             withContext(coroutineContextProvider.io) {
-                quranUseCase.getAllSurah().collect {
-                    _listSurah.postValue(AppMapper.mapSurahDomainToPresentation(it))
+                quranUseCase.getAllSurah().collect { data ->
+                    _listSurah.postValue(AppMapper.mapSurahDomainToPresentation(data))
                 }
             }
         }

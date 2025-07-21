@@ -22,10 +22,9 @@ import kotlinx.coroutines.test.*
 import org.junit.rules.TestWatcher
 import org.junit.runner.Description
 
-@ExperimentalCoroutinesApi
-class MainCoroutineScopeRule(private val dispatcher: TestCoroutineDispatcher = TestCoroutineDispatcher()) :
-    TestWatcher(),
-    TestCoroutineScope by TestCoroutineScope(dispatcher) {
+@OptIn(ExperimentalCoroutinesApi::class)
+class MainCoroutineScopeRule(private val dispatcher: TestDispatcher = UnconfinedTestDispatcher()) :
+    TestWatcher() {
     override fun starting(description: Description?) {
         super.starting(description)
         Dispatchers.setMain(dispatcher)
@@ -33,8 +32,6 @@ class MainCoroutineScopeRule(private val dispatcher: TestCoroutineDispatcher = T
 
     override fun finished(description: Description?) {
         super.finished(description)
-        advanceUntilIdle()
-        cleanupTestCoroutines()
         Dispatchers.resetMain()
     }
 }

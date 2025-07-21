@@ -9,11 +9,11 @@ import com.dzulfaqar.quranku.core.data.Resource
 import com.dzulfaqar.quranku.core.domain.usecase.QuranUseCase
 import com.dzulfaqar.quranku.model.ReciterModel
 import com.dzulfaqar.quranku.utils.AppMapper
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import javax.inject.Inject
 
-class RecitationViewModel(
+class RecitationViewModel @Inject constructor(
     private val coroutineContextProvider: CoroutineContextProvider,
     private val quranUseCase: QuranUseCase
 ) : ViewModel() {

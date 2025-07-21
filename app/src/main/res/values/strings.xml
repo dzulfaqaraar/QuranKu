@@ -21,4 +21,8 @@
     <string name="no_data">No data found</string>
     <string name="sync_failed">Sync failed. Please try again.</string>
     <string name="title_library">Library</string>
+    
+    <!-- Feature Module Activity Titles -->
+    <string name="bookmark_title">Bookmarks</string>
+    <string name="recitation_title">Recitations</string>
 </resources>

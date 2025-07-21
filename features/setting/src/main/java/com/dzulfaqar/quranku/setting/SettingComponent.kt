@@ -13,7 +13,7 @@ interface SettingComponent {
     @Component.Builder
     interface Builder {
         fun context(@BindsInstance context: Context): Builder
-        fun appDependencies(moduleDependencies: SettingModuleDependencies): Builder
+        fun appDependencies(settingModuleDependencies: SettingModuleDependencies): Builder
         fun build(): SettingComponent
     }
 }

@@ -2,7 +2,6 @@ package com.dzulfaqar.quranku.murattal
 
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
-import by.kirich1409.viewbindingdelegate.viewBinding
 import com.dzulfaqar.quranku.R
 import com.dzulfaqar.quranku.databinding.ItemRecitationBinding
 import com.dzulfaqar.quranku.core.utils.BaseAdapter
@@ -19,7 +18,7 @@ class RecitationAdapter(
         holder.bind(item)
 
     inner class ListViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        private val binding: ItemRecitationBinding by viewBinding()
+        private val binding: ItemRecitationBinding = ItemRecitationBinding.bind(view)
 
         fun bind(data: ReciterModel) {
             with(binding) {

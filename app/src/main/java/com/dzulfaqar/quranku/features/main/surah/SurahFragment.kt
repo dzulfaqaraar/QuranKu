@@ -7,7 +7,6 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import by.kirich1409.viewbindingdelegate.viewBinding
 import com.dzulfaqar.quranku.R
 import com.dzulfaqar.quranku.core.data.Resource
 import com.dzulfaqar.quranku.databinding.FragmentSurahBinding
@@ -17,12 +16,14 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class SurahFragment : Fragment(R.layout.fragment_surah) {
 
-    private val binding: FragmentSurahBinding by viewBinding()
+    private var _binding: FragmentSurahBinding? = null
+    private val binding get() = _binding!!
     private val viewModel: SurahViewModel by viewModels()
     private var surahAdapter: SurahAdapter? = null
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        _binding = FragmentSurahBinding.bind(view)
         if (activity != null) {
             surahAdapter = SurahAdapter()
             surahAdapter?.onItemClick = { selectedData ->
@@ -82,5 +83,6 @@ class SurahFragment : Fragment(R.layout.fragment_surah) {
     override fun onDestroyView() {
         binding.recyclerView.adapter = null
         super.onDestroyView()
+        _binding = null
     }
 }

@@ -3,7 +3,6 @@ package com.dzulfaqar.quranku.ui
 import android.view.View
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
-import by.kirich1409.viewbindingdelegate.viewBinding
 import com.dzulfaqar.quranku.R
 import com.dzulfaqar.quranku.databinding.ItemAyatBinding
 import com.dzulfaqar.quranku.core.utils.BaseAdapter
@@ -22,7 +21,7 @@ class AyatAdapter(
     fun getSwipedData(swipedPosition: Int): AyatModel = getItem(swipedPosition)
 
     inner class ListViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        private val binding: ItemAyatBinding by viewBinding()
+        private val binding: ItemAyatBinding = ItemAyatBinding.bind(view)
 
         fun bind(data: AyatModel) {
             with(binding) {

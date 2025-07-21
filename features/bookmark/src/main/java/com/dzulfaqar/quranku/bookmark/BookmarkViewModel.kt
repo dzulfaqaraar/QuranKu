@@ -9,11 +9,11 @@ import com.dzulfaqar.quranku.core.domain.usecase.QuranUseCase
 import com.dzulfaqar.quranku.core.utils.Event
 import com.dzulfaqar.quranku.model.AyatModel
 import com.dzulfaqar.quranku.utils.AppMapper
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import javax.inject.Inject
 
-class BookmarkViewModel(
+class BookmarkViewModel @Inject constructor(
     private val coroutineContextProvider: CoroutineContextProvider,
     private val quranUseCase: QuranUseCase
 ) : ViewModel() {
@@ -30,8 +30,8 @@ class BookmarkViewModel(
     private fun getListBookmark() {
         viewModelScope.launch {
             withContext(coroutineContextProvider.io) {
-                quranUseCase.getAllBookmark().collect {
-                    _listBookmark.postValue(AppMapper.mapAyatDomainToPresentation(it))
+                quranUseCase.getAllBookmark().collect { data ->
+                    _listBookmark.postValue(AppMapper.mapAyatDomainToPresentation(data))
                 }
             }
         }

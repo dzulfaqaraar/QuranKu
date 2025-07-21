@@ -12,7 +12,6 @@ import com.dzulfaqar.quranku.core.utils.Event
 import com.dzulfaqar.quranku.model.*
 import com.dzulfaqar.quranku.utils.AppMapper
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
@@ -54,8 +53,8 @@ class QuranViewModel @Inject constructor(
     private fun getListAyat() {
         viewModelScope.launch {
             withContext(coroutineContextProvider.io) {
-                quranUseCase.getAllAyat().collect {
-                    _listAyatState.postValue(AppMapper.mapAyatDomainToPresentation(it))
+                quranUseCase.getAllAyat().collect { data ->
+                    _listAyatState.postValue(AppMapper.mapAyatDomainToPresentation(data))
                 }
             }
         }
@@ -64,8 +63,8 @@ class QuranViewModel @Inject constructor(
     private fun getLatestRecitation() {
         viewModelScope.launch {
             withContext(coroutineContextProvider.io) {
-                quranUseCase.getLatestRecitation().collect {
-                    _latestRecitation.postValue(AppMapper.mapReciterDomainToPresentation(it))
+                quranUseCase.getLatestRecitation().collect { data ->
+                    _latestRecitation.postValue(AppMapper.mapReciterDomainToPresentation(data))
                 }
             }
         }
@@ -74,8 +73,8 @@ class QuranViewModel @Inject constructor(
     fun getAllAyatBySurah(surah: SurahModel?) {
         viewModelScope.launch {
             withContext(coroutineContextProvider.io) {
-                quranUseCase.getAllAyatBySurah(AppMapper.mapSurahModelToDomain(surah)).collect {
-                    _listAyatData.postValue(AppMapper.mapAyatDomainToPresentation(it))
+                quranUseCase.getAllAyatBySurah(AppMapper.mapSurahModelToDomain(surah)).collect { data ->
+                    _listAyatData.postValue(AppMapper.mapAyatDomainToPresentation(data))
                 }
             }
         }
@@ -84,8 +83,8 @@ class QuranViewModel @Inject constructor(
     fun getAllAyatByJuz(juz: JuzModel?) {
         viewModelScope.launch {
             withContext(coroutineContextProvider.io) {
-                quranUseCase.getAllAyatByJuz(AppMapper.mapJuzModelToDomain(juz)).collect {
-                    _listAyatData.postValue(AppMapper.mapAyatDomainToPresentation(it))
+                quranUseCase.getAllAyatByJuz(AppMapper.mapJuzModelToDomain(juz)).collect { data ->
+                    _listAyatData.postValue(AppMapper.mapAyatDomainToPresentation(data))
                 }
             }
         }
@@ -112,8 +111,8 @@ class QuranViewModel @Inject constructor(
     fun getRecitationByChapter(id: Int, surah: Int) {
         viewModelScope.launch {
             withContext(coroutineContextProvider.io) {
-                quranUseCase.getRecitationByChapter(id, surah).collect {
-                    _listAudioFiles.postValue(AppMapper.mapAudioDomainToPresentation(it))
+                quranUseCase.getRecitationByChapter(id, surah).collect { data ->
+                    _listAudioFiles.postValue(AppMapper.mapAudioDomainToPresentation(data))
                 }
             }
         }

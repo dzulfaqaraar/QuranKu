@@ -7,7 +7,6 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import by.kirich1409.viewbindingdelegate.viewBinding
 import com.dzulfaqar.quranku.R
 import com.dzulfaqar.quranku.core.data.Resource
 import com.dzulfaqar.quranku.ui.JuzAdapter
@@ -17,12 +16,14 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class JuzFragment : Fragment(R.layout.fragment_juz) {
 
-    private val binding: FragmentJuzBinding by viewBinding()
+    private var _binding: FragmentJuzBinding? = null
+    private val binding get() = _binding!!
     private val viewModel: JuzViewModel by viewModels()
     private var juzAdapter: JuzAdapter? = null
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        _binding = FragmentJuzBinding.bind(view)
         if (activity != null) {
             juzAdapter = JuzAdapter()
             juzAdapter?.onItemClick = { selectedData ->
@@ -84,5 +85,6 @@ class JuzFragment : Fragment(R.layout.fragment_juz) {
     override fun onDestroyView() {
         binding.recyclerView.adapter = null
         super.onDestroyView()
+        _binding = null
     }
 }
